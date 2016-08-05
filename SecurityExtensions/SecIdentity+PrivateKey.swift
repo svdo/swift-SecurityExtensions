@@ -1,9 +1,11 @@
 import Foundation
 
-extension SecIdentity {
+public extension SecIdentity {
     
     /**
-     * Helper to retrieve the identity's private key. Wraps `SecIdentityCopyPrivateKey()`.
+     * Retrieves the identity's private key. Wraps `SecIdentityCopyPrivateKey()`.
+     *
+     * - returns: the identity's private key, if possible
      */
     public var privateKey: SecKey? {
         var privKey : SecKey?

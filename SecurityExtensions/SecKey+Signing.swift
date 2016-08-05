@@ -11,9 +11,9 @@ extension SecKey {
      * is a private key, but that is not verified here.
      *
      * - parameter data: the data to sign
-     * - returns: The signature of the data.
+     * - returns: The signature of the data, or `nil` if signing failed.
      */
-    public func sign(data data:[UInt8]) -> [UInt8] {
+    public func sign(data data:[UInt8]) -> [UInt8]? {
         let sha1 = Digest(algorithm: .SHA1)
         sha1.update(data)
         let digest = sha1.final()
@@ -22,7 +22,7 @@ extension SecKey {
         var signatureLength = 1024
         let status = SecKeyRawSign(self, .PKCS1SHA1, digest, digest.count, &signature, &signatureLength)
         guard status == errSecSuccess else {
-            return []
+            return nil
         }
         let realSignature = signature[0 ..< signatureLength]
         return Array(realSignature)

@@ -1,11 +1,36 @@
 import Security
 
-extension SecCertificate {
+public extension SecCertificate {
 
+    /**
+     * Loads a certificate from a DER encoded file. Wraps `SecCertificateCreateWithData`.
+     *
+     * - parameter file: The DER encoded file from which to load the certificate
+     * - returns: A `SecCertificate` if it could be loaded, or `nil`
+     */
+    static public func create(derEncodedFile file: String) -> SecCertificate? {
+        guard let data = NSData(contentsOfFile: file) else {
+            return nil
+        }
+        let cfData = CFDataCreateWithBytesNoCopy(nil, UnsafePointer<UInt8>(data.bytes), data.length, kCFAllocatorNull)
+        return SecCertificateCreateWithData(kCFAllocatorDefault, cfData)
+    }
+
+    /**
+     * Returns the data of the certificate by calling `SecCertificateCopyData`.
+     *
+     * - returns: the data of the certificate
+     */
     public var data: NSData {
         return SecCertificateCopyData(self) as NSData
     }
-    
+
+    /**
+     * Tries to return the public key of this certificate. Wraps `SecTrustCopyPublicKey`.
+     * Uses `SecTrustCreateWithCertificates` with `SecPolicyCreateBasicX509()` policy.
+     *
+     * - returns: the public key if possible
+     */
     public var publicKey: SecKey? {
         let policy: SecPolicy = SecPolicyCreateBasicX509()
         var uTrust: SecTrust?
