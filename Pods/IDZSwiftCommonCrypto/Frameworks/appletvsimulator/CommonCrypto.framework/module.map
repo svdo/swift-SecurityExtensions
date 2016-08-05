@@ -1,0 +1,5 @@
+module CommonCrypto [system] {
+  header "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVSimulator.platform/Developer/SDKs/AppleTVSimulator9.2.sdk/usr/include/CommonCrypto//CommonCrypto.h"
+  header "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVSimulator.platform/Developer/SDKs/AppleTVSimulator9.2.sdk/usr/include/CommonCrypto//CommonRandom.h"
+  export *
+}

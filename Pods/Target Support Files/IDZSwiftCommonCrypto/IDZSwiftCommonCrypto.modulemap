@@ -1,0 +1,6 @@
+framework module IDZSwiftCommonCrypto {
+  umbrella header "IDZSwiftCommonCrypto-umbrella.h"
+
+  export *
+  module * { export * }
+}
