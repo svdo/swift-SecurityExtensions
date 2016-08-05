@@ -21,6 +21,8 @@
 		02C5589A1D549C95008708A6 /* SecKey+KeyPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558951D549C95008708A6 /* SecKey+KeyPairTests.swift */; };
 		02C5589B1D549C95008708A6 /* SecKey+SigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558961D549C95008708A6 /* SecKey+SigningTests.swift */; };
 		02C5589D1D54CC5A008708A6 /* SecKey+Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5589C1D54CC5A008708A6 /* SecKey+Crypt.swift */; };
+		02C5589F1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 02C5589E1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der */; };
+		02C558A11D54CF75008708A6 /* SecCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558A01D54CF75008708A6 /* SecCertificateTests.swift */; };
 		1E9C2D32161F170BC3593092 /* Pods_SecurityExtensions_SecurityExtensionsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14808150EA0B62F7E7418FFF /* Pods_SecurityExtensions_SecurityExtensionsTests.framework */; };
 		E50520F4136B20D9A7762BC6 /* Pods_SecurityExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375A1D76302C44F1B20E3E58 /* Pods_SecurityExtensions.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		02C558951D549C95008708A6 /* SecKey+KeyPairTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SecKey+KeyPairTests.swift"; sourceTree = "<group>"; };
 		02C558961D549C95008708A6 /* SecKey+SigningTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SecKey+SigningTests.swift"; sourceTree = "<group>"; };
 		02C5589C1D54CC5A008708A6 /* SecKey+Crypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SecKey+Crypt.swift"; sourceTree = "<group>"; };
+		02C5589E1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Staat der Nederlanden EV Root CA.der"; sourceTree = "<group>"; };
+		02C558A01D54CF75008708A6 /* SecCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecCertificateTests.swift; sourceTree = "<group>"; };
 		03B99D28B511DBF7980B731D /* Pods-SecurityExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecurityExtensions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecurityExtensions/Pods-SecurityExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		14808150EA0B62F7E7418FFF /* Pods_SecurityExtensions_SecurityExtensionsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecurityExtensions_SecurityExtensionsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C8F8057A23C23718835665F /* Pods-SecurityExtensions-SecurityExtensionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecurityExtensions-SecurityExtensionsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecurityExtensions-SecurityExtensionsTests/Pods-SecurityExtensions-SecurityExtensionsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,10 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				02C558761D549B40008708A6 /* Info.plist */,
+				02C558A01D54CF75008708A6 /* SecCertificateTests.swift */,
 				02C558921D549C95008708A6 /* SecIdenity+testing.swift */,
 				02C558941D549C95008708A6 /* SecKey+KeyDataTests.swift */,
 				02C558951D549C95008708A6 /* SecKey+KeyPairTests.swift */,
 				02C558961D549C95008708A6 /* SecKey+SigningTests.swift */,
+				02C5589E1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der */,
 			);
 			path = SecurityExtensionsTests;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C5589F1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +367,7 @@
 				02C5589A1D549C95008708A6 /* SecKey+KeyPairTests.swift in Sources */,
 				02C558991D549C95008708A6 /* SecKey+KeyDataTests.swift in Sources */,
 				02C5589B1D549C95008708A6 /* SecKey+SigningTests.swift in Sources */,
+				02C558A11D54CF75008708A6 /* SecCertificateTests.swift in Sources */,
 				02C558971D549C95008708A6 /* SecIdenity+testing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
