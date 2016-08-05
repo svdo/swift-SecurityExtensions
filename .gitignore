@@ -1,0 +1,10 @@
+# Xcode
+build/
+xcuserdata
+
+# AppCode
+**/.idea/*.iml
+**/.idea/vcs.xml
+**/.idea/runConfigurations
+**/.idea/modules.xml
+**/.idea/workspace.xml
