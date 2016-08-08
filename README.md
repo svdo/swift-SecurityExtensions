@@ -91,6 +91,12 @@ Computes the digital signature of the given data using the current key. This ass
     let data: [UInt8] = [1, 2, 3]
     let signature: [UInt8]? = privateKey.sign(data)
 
+Usage
+-----
+The easiest way to use this library is using [CocoaPods](https://cocoapods.org). Just put something like this in your `Podfile`:
+
+    pod 'SecurityExtensions', '~> 1.0'
+
 License
 -------
 The MIT License (MIT)
