@@ -1,5 +1,8 @@
-SecurityExtensions for Swift
-============================
+# SecurityExtensions for Swift
+[![CocoaPods Version Badge](https://img.shields.io/cocoapods/v/SecurityExtensions.svg)](https://cocoapods.org/pods/SecurityExtensions)
+[![License Badge](https://img.shields.io/cocoapods/l/SecurityExtensions.svg)](https://github.com/svdo/swift-SecurityExtensions/blob/master/LICENSE.txt)
+![Supported Platforms Badge](https://img.shields.io/cocoapods/p/SecurityExtensions.svg)
+[![Percentage Documented Badge](https://img.shields.io/cocoapods/metrics/doc-percent/SecurityExtensions.svg)](http://cocoadocs.org/docsets/SecurityExtensions)
 
 This framework intends to make it easier to use some of Apple's Security framework APIs from Swift. I tested this on iOS. It may also work on OS X, didn't look into that. You're welcome to create pull requests :)
 
