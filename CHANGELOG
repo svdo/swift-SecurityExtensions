@@ -1,0 +1,7 @@
+Version 1.0.1
+=============
+Documentation update: everything is documented now.
+
+Version 1.0.0
+=============
+Initial release containing extensions for SecIdentity, SecCertificate and SecKey.
