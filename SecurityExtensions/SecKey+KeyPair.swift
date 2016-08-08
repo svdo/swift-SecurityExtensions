@@ -37,6 +37,16 @@ extension SecKey {
     }
 }
 
+/**
+ * Errors related to SecKey extensions.
+ */
 public enum SecKeyError: ErrorType {
+    /**
+     * Indicates that generating a key pair has failed. The associated osStatus is the return value
+     * of `SecKeyGeneratePair`.
+     *
+     * - parameter osStatus: The return value of SecKeyGeneratePair. If this is `errSecSuccess`
+     *                       then something else failed.
+     */
     case GenerateKeyPairFailed(osStatus: OSStatus?)
 }
