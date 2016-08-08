@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SecurityExtensions"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "This framework intends to make it easier to use some of Apple's Security framework APIs from Swift."
 
   # This description is used to generate tags and improve search results.
