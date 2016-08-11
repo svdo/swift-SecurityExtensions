@@ -20,13 +20,30 @@ extension SecKey {
         var pubKey: SecKey?
         var privKey: SecKey?
         let status = SecKeyGeneratePair(params, &pubKey, &privKey)
-        if (status != errSecSuccess) {
-            throw SecKeyError.GenerateKeyPairFailed(osStatus: nil)
+        guard status == errSecSuccess else {
+            throw SecKeyError.GenerateKeyPairFailed(osStatus: status)
         }
         guard let pub = pubKey, priv = privKey else {
             throw SecKeyError.GenerateKeyPairFailed(osStatus: nil)
         }
+
+        try changeKeyTag(priv)
+        try changeKeyTag(pub)
+
         return (priv, pub)
+    }
+
+    static private func changeKeyTag(key: SecKey) throws {
+        let query = [kSecValueRef as String: key]
+        guard let keyTag = key.keychainTag else {
+            throw SecKeyError.GenerateKeyPairFailed(osStatus: nil)
+        }
+        let attrsToUpdate = [kSecAttrApplicationTag as String: keyTag]
+        let status = SecItemUpdate(query, attrsToUpdate)
+
+        guard status == errSecSuccess else {
+            throw SecKeyError.GenerateKeyPairFailed(osStatus: status)
+        }
     }
 
     /**
