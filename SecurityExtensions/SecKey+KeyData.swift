@@ -1,7 +1,7 @@
 import Foundation
 
 extension SecKey {
-    
+
     /**
      * Provides the raw key data. Wraps `SecItemCopyMatching()`. Only works if the key is
      * available in the keychain. One common way of using this data is to derive a hash
@@ -28,5 +28,32 @@ extension SecKey {
         data.getBytes(&bytes, length:data.length)
         return bytes
     }
-    
+
+    /**
+     * Creates a SecKey based on its raw data, as provided by `keyData`. The key is also
+     * imported into the keychain. If the key already existed in the keychain, it will simply
+     * be returned.
+     *
+     * - parameter data: the raw key data as returned by `keyData`
+     * - returns: the key if it was successfully created and imported, or nil
+     */
+    static public func create(withData data: [UInt8]) -> SecKey? {
+        let tag = SecKey.keychainTag(withData: data)
+        let cfData = CFDataCreate(kCFAllocatorDefault, data, data.count)
+
+        let query: Dictionary<String, AnyObject> = [
+                kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                kSecClass as String: kSecClassKey,
+                kSecAttrApplicationTag as String: tag,
+                kSecValueData as String: cfData,
+                kSecReturnPersistentRef as String: true]
+
+        var persistentRef: AnyObject?
+        let status = SecItemAdd(query, &persistentRef)
+        guard status == errSecSuccess || status == errSecDuplicateItem else {
+            return nil
+        }
+
+        return SecKey.loadFromKeychain(tag: tag)
+    }
 }

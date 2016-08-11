@@ -74,6 +74,12 @@ Returns the key's data if it could be retrieved from the keychain. In other word
     let key: SecKey = ...
     let keyData: [UInt8]? = key.keyData
 
+#### create(withData:)
+Creates a SecKey based on its raw data, as provided by `keyData`. The key is also imported into the keychain. If the key already existed in the keychain, it will simply be returned.
+
+    let keyData: [UInt8] = ...
+    let key: SecKey? = SecKey.create(withData: keyData)
+
 #### generateKeyPair()
 Generates a private-public key pair.
 

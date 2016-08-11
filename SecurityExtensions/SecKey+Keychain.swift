@@ -15,8 +15,12 @@ extension SecKey {
         guard let keyData = self.keyData else {
             return nil
         }
+        return SecKey.keychainTag(withData: keyData)
+    }
+
+    static internal func keychainTag(withData data: [UInt8]) -> String {
         let sha1 = Digest(algorithm: .SHA1)
-        sha1.update(keyData)
+        sha1.update(data)
         let digest = sha1.final()
         return digest.toHexString()
     }
