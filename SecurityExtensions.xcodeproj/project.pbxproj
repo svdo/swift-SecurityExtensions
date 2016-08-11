@@ -25,6 +25,8 @@
 		02C558A11D54CF75008708A6 /* SecCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558A01D54CF75008708A6 /* SecCertificateTests.swift */; };
 		02C558A51D54D77A008708A6 /* SecKey+CryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558A41D54D77A008708A6 /* SecKey+CryptTests.swift */; };
 		1E9C2D32161F170BC3593092 /* Pods_SecurityExtensions_SecurityExtensionsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14808150EA0B62F7E7418FFF /* Pods_SecurityExtensions_SecurityExtensionsTests.framework */; };
+		C00B5CE0260747F9ECF92B6B /* SequenceType_HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5207131A0D04EC6AC660 /* SequenceType_HexString.swift */; };
+		C00B5ECBE80B07521B4068EE /* SequenceType+HexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B571A92CA4BBE0CE30CB3 /* SequenceType+HexStringTests.swift */; };
 		E50520F4136B20D9A7762BC6 /* Pods_SecurityExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375A1D76302C44F1B20E3E58 /* Pods_SecurityExtensions.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		2434F75B0CA57AF9A3399A03 /* Pods-SecurityExtensions-SecurityExtensionsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecurityExtensions-SecurityExtensionsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecurityExtensions-SecurityExtensionsTests/Pods-SecurityExtensions-SecurityExtensionsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		375A1D76302C44F1B20E3E58 /* Pods_SecurityExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecurityExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EC877C314DD49A4C689B862 /* Pods-SecurityExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecurityExtensions.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecurityExtensions/Pods-SecurityExtensions.release.xcconfig"; sourceTree = "<group>"; };
+		C00B5207131A0D04EC6AC660 /* SequenceType_HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceType_HexString.swift; sourceTree = "<group>"; };
+		C00B571A92CA4BBE0CE30CB3 /* SequenceType+HexStringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+HexStringTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 				02C558881D549C8C008708A6 /* SecKey+KeyPair.swift */,
 				02C558891D549C8C008708A6 /* SecKey+Signing.swift */,
 				02C558681D549B40008708A6 /* SecurityExtensions.h */,
+				C00B5207131A0D04EC6AC660 /* SequenceType_HexString.swift */,
 			);
 			path = SecurityExtensions;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				02C558951D549C95008708A6 /* SecKey+KeyPairTests.swift */,
 				02C558961D549C95008708A6 /* SecKey+SigningTests.swift */,
 				02C5589E1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der */,
+				C00B571A92CA4BBE0CE30CB3 /* SequenceType+HexStringTests.swift */,
 			);
 			path = SecurityExtensionsTests;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				02C5588C1D549C8C008708A6 /* SecIdentity.swift in Sources */,
 				02C5588D1D549C8C008708A6 /* SecIdentity+PrivateKey.swift in Sources */,
 				02C5589D1D54CC5A008708A6 /* SecKey+Crypt.swift in Sources */,
+				C00B5CE0260747F9ECF92B6B /* SequenceType_HexString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +380,7 @@
 				02C5589B1D549C95008708A6 /* SecKey+SigningTests.swift in Sources */,
 				02C558A11D54CF75008708A6 /* SecCertificateTests.swift in Sources */,
 				02C558971D549C95008708A6 /* SecIdenity+testing.swift in Sources */,
+				C00B5ECBE80B07521B4068EE /* SequenceType+HexStringTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
