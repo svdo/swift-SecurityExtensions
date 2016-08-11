@@ -1,3 +1,8 @@
+Version 1.2.0
+=============
+- Added ability to convert string with hexadecimal representation of byte
+  array back into a byte array
+
 Version 1.1.0
 =============
 - Added ability to recreate a SecKey from its data.
