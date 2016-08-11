@@ -8,7 +8,7 @@ extension SecKey {
      *
      * - parameter ofSize: the size of the keys in bits
      * - returns: The generated key pair.
-     * - throws: An `NSError` when something went wrong.
+     * - throws: A `SecKeyError` when something went wrong.
      */
     public static func generateKeyPair(ofSize bits:UInt) throws -> (privateKey:SecKey, publicKey:SecKey) {
         let pubKeyAttrs = [ kSecAttrIsPermanent as String: true ]
@@ -28,7 +28,7 @@ extension SecKey {
         }
         return (priv, pub)
     }
-    
+
     /**
      * The block size of the key. Wraps `SecKeyGetBlockSize()`.
      */
