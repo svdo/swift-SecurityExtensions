@@ -12,7 +12,7 @@ This framework provides the following primitives. There are unit tests; have a l
 
 ### SecCertificate Extensions
 
-#### Create
+#### Create(derEncodedFile:)
 Create a certificate by loading its content from a DER-encoded file:
 
     SecCertificate.create(derEncodedFile file: String) -> SecCertificate?
@@ -46,7 +46,7 @@ Get the identity's private key:
 ### SecKey Extensions
 Please note that encrypting only works if the key is a public key, and decrypting only works if the key is a private key. This is not verified by this framework, your application logic has to make sure it is done correctly.
 
-#### encrypt
+#### encrypt()
 Encrypt data or a string using the key. Make sure that the key is a public key, not a private key! Encryption uses PKCS1 padding.
 
     let plainText = "This is some plain text."
@@ -57,7 +57,7 @@ or:
     let plainBytes: [UInt8] = [1, 2, 3]
     let encrypted: [UInt8]? = publicKey.encrypt(plainBytes)
 
-#### decrypt
+#### decrypt()
 Decrypt to data or a string using the key. Make sure that the key is a private key, not a public key! Decryption uses PKCS1 padding.
 
     let encryptedBytes: [UInt8] = ...
@@ -74,7 +74,7 @@ Returns the key's data if it could be retrieved from the keychain. In other word
     let key: SecKey = ...
     let keyData: [UInt8]? = key.keyData
 
-#### generateKeyPair
+#### generateKeyPair()
 Generates a private-public key pair.
 
     let (privateKey, publicKey) = try SecKey.generateKeyPair(3072)
@@ -85,11 +85,32 @@ Returns the block size of the key.
     let key: SecKey = ...
     let blockSize: Int = key.blockSize
 
-#### sign
+#### sign()
 Computes the digital signature of the given data using the current key. This assumes the key to be a private key.
 
     let data: [UInt8] = [1, 2, 3]
     let signature: [UInt8]? = privateKey.sign(data)
+
+#### keychainTag
+Returns the tag that was used to store the key in the keychain.
+
+    let key: SecKey = ...
+    let tag: String = key.keychainTag
+
+#### loadFromKeychain(tag:)
+Loads a key from the keychain based on the tag. The tag is the string returned by `keychainTag`.
+
+    let tag: String = ...
+    let key: SecKey? = SecKey.loadFromKeychain(tag: tag)
+
+### SequenceType
+This framework also provides an extension to SequenceType that allows creating a hexadecimal string representation of a byte array.
+
+#### toHexString
+Creates a string representation of a byte array (`[UInt8]`) by concatenating the hexadecimal representation of all bytes. The string _does not_ include the prefix '0x' that is commonly used to indicate hexadecimal representations.
+
+    let bytes: [UInt8] = [0, 1, 2, 255]
+    let hexString = bytes.toHexString() // "0x000102ff"
 
 Usage
 -----

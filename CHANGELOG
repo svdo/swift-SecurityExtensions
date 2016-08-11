@@ -1,3 +1,8 @@
+Version 1.0.2
+=============
+- Added ability to load a SecKey from the Keychain based on a tag
+- Fixed documentation: type of errors thrown by `SecKey.generateKeyPair()`
+
 Version 1.0.1
 =============
 Documentation update: everything is documented now.

@@ -2,7 +2,7 @@
 
 extension SequenceType where Generator.Element == UInt8 {
     /**
-     * Creates a string representation of a byte array (`[UInt8]`) by printing
+     * Creates a string representation of a byte array (`[UInt8]`) by concatenating
      * the hexadecimal representation of all bytes. The string _does not_ include
      * the prefix '0x' that is commonly used to indicate hexadecimal representations.
      *
