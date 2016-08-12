@@ -10,14 +10,31 @@ public extension SecKey {
      */
     func encrypt(bytes: [UInt8]) -> [UInt8]? {
         let blockSize = SecKeyGetBlockSize(self)
-        var cypherText: [UInt8] = Array(count: Int(blockSize), repeatedValue: UInt8(0))
-        var cypherLength: Int = blockSize
 
-        let resultCode = SecKeyEncrypt(self, SecPadding.PKCS1, bytes, bytes.count, &cypherText, &cypherLength)
-        if errSecSuccess != resultCode {
-            return nil
+        // From SecKeyEncrypt:
+        // When PKCS1 padding is performed, the maximum length of data that can be
+        // encrypted is 11 bytes less than the value returned by the SecKeyGetBlockSize
+        // function (secKeyGetBlockSize() - 11)
+        let maxDataLength = blockSize - 11
+
+        var encryptedBytes = [UInt8]()
+
+        let numBlocks = Int(ceil(Float(bytes.count) / Float(maxDataLength)))
+        for i in 0 ..< numBlocks {
+            let start = i * maxDataLength
+            let end = min((i+1) * maxDataLength, bytes.count)
+            let block = Array(bytes[start ..< end])
+
+            var cypherText: [UInt8] = Array(count: Int(blockSize), repeatedValue: UInt8(0))
+            var cypherLength: Int = blockSize
+
+            let resultCode = SecKeyEncrypt(self, SecPadding.PKCS1, block, block.count, &cypherText, &cypherLength)
+            guard resultCode == errSecSuccess else {
+                return nil
+            }
+            encryptedBytes += cypherText[0 ..< cypherLength]
         }
-        return Array(cypherText[0 ..< cypherLength])
+        return encryptedBytes
     }
 
     /**
@@ -40,13 +57,25 @@ public extension SecKey {
      */
     func decrypt(cypherText: [UInt8]) -> [UInt8]? {
         let blockSize = SecKeyGetBlockSize(self)
-        var plainTextData: [UInt8] = Array(count: Int(blockSize), repeatedValue: UInt8(0))
-        var plainTextDataLength: Int = blockSize
-        let resultCode = SecKeyDecrypt(self, SecPadding.PKCS1, cypherText, cypherText.count, &plainTextData, &plainTextDataLength)
-        if errSecSuccess != resultCode {
-            return nil
+
+        var decryptedBytes = [UInt8]()
+
+        let numBlocks = Int(ceil(Float(cypherText.count) / Float(blockSize)))
+        for i in 0 ..< numBlocks {
+            let start = i * blockSize
+            let end = min((i+1)*blockSize, cypherText.count)
+            let block = Array(cypherText[start ..< end])
+
+            var plainTextData: [UInt8] = Array(count: Int(blockSize), repeatedValue: UInt8(0))
+            var plainTextDataLength: Int = blockSize
+            let resultCode = SecKeyDecrypt(self, SecPadding.PKCS1, block, block.count, &plainTextData, &plainTextDataLength)
+            guard resultCode == errSecSuccess else {
+                return nil
+            }
+            decryptedBytes += Array(plainTextData[0 ..< plainTextDataLength])
         }
-        return Array(plainTextData[0 ..< plainTextDataLength])
+
+        return decryptedBytes
     }
 
     /**
