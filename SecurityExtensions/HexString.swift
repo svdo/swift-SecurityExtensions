@@ -8,7 +8,7 @@ extension SequenceType where Generator.Element == UInt8 {
      *
      * - returns: the hexadecimal representation of the byte array
      */
-    public func toHexString() -> String {
+    public func hexString() -> String {
         return self.reduce("", combine: { $0 + String(format: "%02x", $1)})
     }
 }
@@ -21,7 +21,7 @@ extension String {
      *
      * - returns: the parsed byte array, or nil if parsing failed
      */
-    public func toByteArray() -> [UInt8]? {
+    public func hexByteArray() -> [UInt8]? {
         guard self.characters.count % 2 == 0 else {
             return nil
         }
@@ -45,7 +45,7 @@ private func stringToByteArray(string: String) -> [UInt8]? {
     let split = string.startIndex.advancedBy(2)
     let head = string.substringToIndex(split)
     let tail = string.substringFromIndex(split)
-    guard let headByte = hexByteToByteArray(head) else {
+    guard let headByte = scanHexByte(head) else {
         return nil
     }
     guard let tailBytes = stringToByteArray(tail) else {
@@ -54,7 +54,7 @@ private func stringToByteArray(string: String) -> [UInt8]? {
     return [headByte] + tailBytes
 }
 
-private func hexByteToByteArray(byteString: String) -> UInt8? {
+private func scanHexByte(byteString: String) -> UInt8? {
     var scanned: UInt32 = 0
     let scanner = NSScanner(string: byteString)
     guard scanner.scanHexInt(&scanned) && scanner.atEnd else {

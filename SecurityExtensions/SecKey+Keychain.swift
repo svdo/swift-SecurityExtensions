@@ -22,7 +22,7 @@ extension SecKey {
         let sha1 = Digest(algorithm: .SHA1)
         sha1.update(data)
         let digest = sha1.final()
-        return digest.toHexString()
+        return digest.hexString()
     }
 
     /**
