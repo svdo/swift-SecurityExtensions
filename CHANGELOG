@@ -1,3 +1,12 @@
+Version 2.0.0
+=============
+API changes:
+- Renamed String extension `toByteArray()` to `hexByteArray()`
+- Renamed byte array extension `toHexString()` to `hexString()`
+
+Issues fixed:
+- Fixed issue with encrypt en decrypt: can now also process larger quantities of data
+
 Version 1.2.0
 =============
 - Added ability to convert string with hexadecimal representation of byte

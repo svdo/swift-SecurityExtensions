@@ -112,20 +112,20 @@ Loads a key from the keychain based on the tag. The tag is the string returned b
 ### SequenceType
 This framework also provides an extension to SequenceType that allows creating a hexadecimal string representation of a byte array.
 
-#### toHexString
-Creates a string representation of a byte array (`[UInt8]`) by concatenating the hexadecimal representation of all bytes. The string _does not_ include the prefix '0x' that is commonly used to indicate hexadecimal representations. This is the inverse function of `String.toByteArray()`.
+#### hexString()
+Creates a string representation of a byte array (`[UInt8]`) by concatenating the hexadecimal representation of all bytes. The string _does not_ include the prefix '0x' that is commonly used to indicate hexadecimal representations. This is the inverse function of `String.hexByteArray()`.
 
     let bytes: [UInt8] = [0, 1, 2, 255]
-    let hexString = bytes.toHexString() // "0x000102ff"
+    let hexString = bytes.hexString() // "0x000102ff"
 
 ### String
-The inverse function of `toHexString` is implemented in an extension of `String`.
+The inverse function of `hexString` is implemented in an extension of `String`.
 
-#### toByteArray()
-Converts a string containing the hexadecimal representation of a byte to a byte array. The string must not contain anything else. It may optionally start with the prefix '0x'. Conversion is case insensitive. This is the inverse function of `[UInt8].toHexString()`.
+#### hexByteArray()
+Converts a string containing the hexadecimal representation of a byte to a byte array. The string must not contain anything else. It may optionally start with the prefix '0x'. Conversion is case insensitive. This is the inverse function of `[UInt8].hexString()`.
 
     let hexString = "0xdeadbeef"
-    let bytes: [UInt8]? = hexString.toByteArray() // [0xde, 0xad, 0xbe, 0xff]
+    let bytes: [UInt8]? = hexString.hexByteArray() // [0xde, 0xad, 0xbe, 0xff]
 
 Usage
 -----
