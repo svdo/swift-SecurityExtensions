@@ -38,7 +38,7 @@ extension SecKey {
      * - returns: the key if it was successfully created and imported, or nil
      */
     static public func create(withData data: [UInt8]) -> SecKey? {
-        let tag = SecKey.keychainTag(withData: data)
+        let tag = SecKey.keychainTag(forKeyData: data)
         let cfData = CFDataCreate(kCFAllocatorDefault, data, data.count)
 
         let query: Dictionary<String, AnyObject> = [

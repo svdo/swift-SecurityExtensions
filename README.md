@@ -103,6 +103,12 @@ Returns the tag that was used to store the key in the keychain.
     let key: SecKey = ...
     let tag: String = key.keychainTag
 
+#### keychainTag(forKeyData:)
+Returns the tag of a key represented by the given data. Normally you should prefer using the instance property `keychainTag` instead.
+
+    let keyData: [UInt8] = ...
+    let tag: String = SecKey.keychainTag(forKeyData: keyData)
+
 #### loadFromKeychain(tag:)
 Loads a key from the keychain based on the tag. The tag is the string returned by `keychainTag`.
 

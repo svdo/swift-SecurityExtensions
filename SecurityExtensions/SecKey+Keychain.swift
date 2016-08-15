@@ -15,10 +15,15 @@ extension SecKey {
         guard let keyData = self.keyData else {
             return nil
         }
-        return SecKey.keychainTag(withData: keyData)
+        return SecKey.keychainTag(forKeyData: keyData)
     }
 
-    static internal func keychainTag(withData data: [UInt8]) -> String {
+    /**
+     * Returns the tag of a key that is represented by the given key data.
+     * Normally you should prefer using the instance property `keychainTag`
+     * instead.
+     */
+    static public func keychainTag(forKeyData data: [UInt8]) -> String {
         let sha1 = Digest(algorithm: .SHA1)
         sha1.update(data)
         let digest = sha1.final()
