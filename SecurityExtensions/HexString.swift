@@ -39,19 +39,17 @@ extension String {
 }
 
 private func stringToByteArray(string: String) -> [UInt8]? {
-    guard string.characters.count > 0 else {
-        return []
+    var result = [UInt8]()
+    for byteIndex in 0 ..< string.characters.count/2 {
+        let start = string.startIndex.advancedBy(byteIndex*2)
+        let end = start.advancedBy(2)
+        let byteString = string.substringWithRange(start ..< end)
+        guard let byte = scanHexByte(byteString) else {
+            return nil
+        }
+        result.append(byte)
     }
-    let split = string.startIndex.advancedBy(2)
-    let head = string.substringToIndex(split)
-    let tail = string.substringFromIndex(split)
-    guard let headByte = scanHexByte(head) else {
-        return nil
-    }
-    guard let tailBytes = stringToByteArray(tail) else {
-        return nil
-    }
-    return [headByte] + tailBytes
+    return result
 }
 
 private func scanHexByte(byteString: String) -> UInt8? {
