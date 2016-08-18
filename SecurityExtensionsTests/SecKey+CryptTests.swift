@@ -37,7 +37,7 @@ class SecKey_CryptTests: QuickSpec {
             }.toNot(throwError())
         }
 
-        fit("can encrypt a long string") {
+        it("can encrypt a long string") {
             expect { Void->Void in
                 let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
                 let loremIpsumBytes = [UInt8](loremIpsum.utf8)
