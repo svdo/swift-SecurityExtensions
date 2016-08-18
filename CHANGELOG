@@ -1,3 +1,7 @@
+Version 2.1.1
+=============
+Changed implementation of hexByteArray so that it is no longer recursive.
+
 Version 2.1.0
 =============
 Added static function `SecKey.keychainTag(forKeyData:)` to compute the tag if you don't have the key itself,

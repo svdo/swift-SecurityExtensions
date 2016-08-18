@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SecurityExtensions"
-  s.version      = "2.1.0"
+  s.version      = "2.1.1"
   s.summary      = "This framework intends to make it easier to use some of Apple's Security framework APIs from Swift."
   s.description  = <<-DESC
                    This framework provides extensions for SecIdentity, SecCertificate and SecKey. It allows you to easily use their functionality in a Swift manner. Things you can do include: generate key pairs, encrypt and decrypt, sign data, get public keys and private keys from identities and certificates.
