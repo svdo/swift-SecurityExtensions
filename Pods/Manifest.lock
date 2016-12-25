@@ -1,18 +1,18 @@
 PODS:
-  - IDZSwiftCommonCrypto (0.7.3)
-  - Nimble (4.1.0)
-  - Quick (0.9.3)
+  - IDZSwiftCommonCrypto (0.9.0)
+  - Nimble (5.1.1)
+  - Quick (1.0.0)
 
 DEPENDENCIES:
-  - IDZSwiftCommonCrypto (~> 0.7)
-  - Nimble (~> 4.0)
-  - Quick (~> 0.9)
+  - IDZSwiftCommonCrypto (~> 0.9)
+  - Nimble (~> 5.0)
+  - Quick (~> 1.0)
 
 SPEC CHECKSUMS:
-  IDZSwiftCommonCrypto: f4271e731bdeefa85832d425629134fc01efd659
-  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
-  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
+  IDZSwiftCommonCrypto: 60f14492730da20117ce5875b890c7a6fc38ab8c
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
 
-PODFILE CHECKSUM: aa530b72b7c5031227b367f8c56af4c4d533e2e9
+PODFILE CHECKSUM: 39c4393ed04af7b4e8dec08c8c18c4d05055d6ff
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
