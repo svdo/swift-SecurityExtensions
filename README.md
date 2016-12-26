@@ -8,6 +8,8 @@
 
 This framework intends to make it easier to use some of Apple's Security framework APIs from Swift. I tested this on iOS. It may also work on OS X, didn't look into that. You're welcome to create pull requests :)
 
+This framework requires Swift version 3.
+
 Overview
 --------
 This framework provides the following primitives. There are unit tests; have a look at them for examples.
