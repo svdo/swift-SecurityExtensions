@@ -1,4 +1,6 @@
 # SecurityExtensions for Swift
+
+![Swift Version 3](https://img.shields.io/badge/Swift-v3-yellow.svg)
 [![CocoaPods Version Badge](https://img.shields.io/cocoapods/v/SecurityExtensions.svg)](https://cocoapods.org/pods/SecurityExtensions)
 [![License Badge](https://img.shields.io/cocoapods/l/SecurityExtensions.svg)](https://github.com/svdo/swift-SecurityExtensions/blob/master/LICENSE.txt)
 ![Supported Platforms Badge](https://img.shields.io/cocoapods/p/SecurityExtensions.svg)
