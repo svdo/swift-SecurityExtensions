@@ -2,17 +2,6 @@ import Quick
 import Nimble
 import SecurityExtensions
 
-func testKeyPair() -> KeyPair {
-    var keyPair: KeyPair? = nil
-    do {
-        keyPair = try SecKey.generateKeyPair(ofSize: 512)
-    } catch let e {
-        print("Generation of key pair raised exception: \(e). Note: logic testing on iOS simulator does NOT"
-              + " work on iOS 10 simulator, please use iOS 9.3 simulator.")
-    }
-    return keyPair!
-}
-
 class SecKeyCryptTests: QuickSpec {
     override func spec() {
         it("can decrypt encrypted utf8 strings") {
