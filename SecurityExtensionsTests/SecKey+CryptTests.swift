@@ -1,52 +1,54 @@
 import Quick
 import Nimble
+import SecurityExtensions
 
-class SecKey_CryptTests: QuickSpec {
+func testKeyPair() -> KeyPair {
+    var keyPair: KeyPair? = nil
+    do {
+        keyPair = try SecKey.generateKeyPair(ofSize: 512)
+    } catch let e {
+        print("Generation of key pair raised exception: \(e). Note: logic testing on iOS simulator does NOT"
+              + " work on iOS 10 simulator, please use iOS 9.3 simulator.")
+    }
+    return keyPair!
+}
+
+class SecKeyCryptTests: QuickSpec {
     override func spec() {
         it("can decrypt encrypted utf8 strings") {
-            expect { Void->Void in
-                let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
-                let text = "This is some text"
-                let encrypted = pubKey.encrypt(text)
-                let decrypted = privKey.decryptUtf8(encrypted!)
-                expect(decrypted) == text
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            let text = "This is some text"
+            let encrypted = keys.publicKey.encrypt(text)
+            let decrypted = keys.privateKey.decryptUtf8(encrypted!)
+            expect(decrypted) == text
         }
 
         it("can decrypt encrypted data") {
-            expect { Void->Void in
-                let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
-                let data: [UInt8] = [1, 42, 255, 128, 33, 183]
-                let encrypted = pubKey.encrypt(data)
-                let decrypted = privKey.decrypt(encrypted!)
-                expect(decrypted) == data
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            let data: [UInt8] = [1, 42, 255, 128, 33, 183]
+            let encrypted = keys.publicKey.encrypt(data)
+            let decrypted = keys.privateKey.decrypt(encrypted!)
+            expect(decrypted) == data
         }
 
         it("cannot decrypt rubbish") {
-            expect { Void->Void in
-                let (privKey, _) = try SecKey.generateKeyPair(ofSize: 512)
-                expect(privKey.decrypt([1,2,3])).to(beNil())
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            expect(keys.privateKey.decrypt([1,2,3])).to(beNil())
         }
 
         it("cannot encrypt with private key") {
-            expect { Void->Void in
-                let (privKey, _) = try SecKey.generateKeyPair(ofSize: 512)
-                expect(privKey.encrypt([1,2,3])).to(beNil())
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            expect(keys.privateKey.encrypt([1,2,3])).to(beNil())
         }
 
         it("can encrypt a long string") {
-            expect { Void->Void in
-                let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
-                let loremIpsumBytes = [UInt8](loremIpsum.utf8)
-                let encryptedBytes = pubKey.encrypt(loremIpsumBytes)
-                expect(encryptedBytes).toNot(beNil())
-                let decryptedBytes = privKey.decrypt(encryptedBytes!)
-                expect(decryptedBytes).toNot(beNil())
-                expect(decryptedBytes) == loremIpsumBytes
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            let loremIpsumBytes = [UInt8](loremIpsum.utf8)
+            let encryptedBytes = keys.publicKey.encrypt(loremIpsumBytes)
+            expect(encryptedBytes).toNot(beNil())
+            let decryptedBytes = keys.privateKey.decrypt(encryptedBytes!)
+            expect(decryptedBytes).toNot(beNil())
+            expect(decryptedBytes) == loremIpsumBytes
         }
     }
 }

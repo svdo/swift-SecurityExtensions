@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import SecurityExtensions
 
 class HexStringTests: QuickSpec {
     override func spec() {
@@ -16,7 +17,7 @@ class HexStringTests: QuickSpec {
         }
 
         it("can convert an empty string to a byte array") {
-            expect("".hexByteArray()) == []
+            expect("".hexByteArray()) == [UInt8]()
         }
 
         it("cannot convert an odd-sized string") {

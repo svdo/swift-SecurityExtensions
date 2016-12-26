@@ -24,8 +24,8 @@ extension SecKey {
      * instead.
      */
     static public func keychainTag(forKeyData data: [UInt8]) -> String {
-        let sha1 = Digest(algorithm: .SHA1)
-        sha1.update(data)
+        let sha1 = Digest(algorithm: .sha1)
+        _ = sha1.update(buffer: data, byteCount: data.count)
         let digest = sha1.final()
         return digest.hexString()
     }
@@ -37,18 +37,17 @@ extension SecKey {
      * - parameter tag: the tag as returned by `keychainTag`
      * - returns: the retrieved key, if found
      */
-    static public func loadFromKeychain(tag tag: String) -> SecKey? {
+    static public func loadFromKeychain(tag: String) -> SecKey? {
         let query: [String:AnyObject] = [
                 kSecClass as String: kSecClassKey,
-                kSecAttrApplicationTag as String: tag,
+                kSecAttrApplicationTag as String: tag as AnyObject,
                 kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-                kSecReturnRef as String: true
+                kSecReturnRef as String: true as AnyObject
         ]
 
         var result: AnyObject?
-        let status = SecItemCopyMatching(query, &result)
-        guard let resultObject = result
-            where status == errSecSuccess
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard let resultObject = result, status == errSecSuccess
                   && CFGetTypeID(resultObject) == SecKeyGetTypeID() else {
             return nil
         }

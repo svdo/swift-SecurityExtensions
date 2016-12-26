@@ -9,11 +9,11 @@ public extension SecCertificate {
      * - returns: A `SecCertificate` if it could be loaded, or `nil`
      */
     static public func create(derEncodedFile file: String) -> SecCertificate? {
-        guard let data = NSData(contentsOfFile: file) else {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: file)) else {
             return nil
         }
-        let cfData = CFDataCreateWithBytesNoCopy(nil, UnsafePointer<UInt8>(data.bytes), data.length, kCFAllocatorNull)
-        return SecCertificateCreateWithData(kCFAllocatorDefault, cfData)
+        let cfData = CFDataCreateWithBytesNoCopy(nil, (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count), data.count, kCFAllocatorNull)
+        return SecCertificateCreateWithData(kCFAllocatorDefault, cfData!)
     }
 
     /**
@@ -21,8 +21,8 @@ public extension SecCertificate {
      *
      * - returns: the data of the certificate
      */
-    public var data: NSData {
-        return SecCertificateCopyData(self) as NSData
+    public var data: Data {
+        return SecCertificateCopyData(self) as Data
     }
 
     /**
@@ -34,7 +34,7 @@ public extension SecCertificate {
     public var publicKey: SecKey? {
         let policy: SecPolicy = SecPolicyCreateBasicX509()
         var uTrust: SecTrust?
-        let resultCode = SecTrustCreateWithCertificates([self], policy, &uTrust)
+        let resultCode = SecTrustCreateWithCertificates([self] as CFArray, policy, &uTrust)
         if (resultCode != errSecSuccess) {
             return nil
         }

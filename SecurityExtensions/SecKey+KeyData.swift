@@ -15,17 +15,17 @@ extension SecKey {
      * - returns: the key's raw data if it could be retrieved from the keychain, or `nil`
      */
     public var keyData: [UInt8]? {
-        let query = [ kSecValueRef as String : self, kSecReturnData as String : true ]
+        let query = [ kSecValueRef as String : self, kSecReturnData as String : true ] as [String : Any]
         var out: AnyObject?
-        guard errSecSuccess == SecItemCopyMatching(query, &out) else {
+        guard errSecSuccess == SecItemCopyMatching(query as CFDictionary, &out) else {
             return nil
         }
-        guard let data = out as? NSData else {
+        guard let data = out as? Data else {
             return nil
         }
 
-        var bytes = [UInt8](count: data.length, repeatedValue: 0)
-        data.getBytes(&bytes, length:data.length)
+        var bytes = [UInt8](repeating: 0, count: data.count)
+        (data as NSData).getBytes(&bytes, length:data.count)
         return bytes
     }
 
@@ -44,12 +44,12 @@ extension SecKey {
         let query: Dictionary<String, AnyObject> = [
                 kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                 kSecClass as String: kSecClassKey,
-                kSecAttrApplicationTag as String: tag,
-                kSecValueData as String: cfData,
-                kSecReturnPersistentRef as String: true]
+                kSecAttrApplicationTag as String: tag as AnyObject,
+                kSecValueData as String: cfData!,
+                kSecReturnPersistentRef as String: true as AnyObject]
 
         var persistentRef: AnyObject?
-        let status = SecItemAdd(query, &persistentRef)
+        let status = SecItemAdd(query as CFDictionary, &persistentRef)
         guard status == errSecSuccess || status == errSecDuplicateItem else {
             return nil
         }

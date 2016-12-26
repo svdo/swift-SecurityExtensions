@@ -4,8 +4,8 @@ import SecurityExtensions
 
 class SecCertificateTests: QuickSpec {
     override func spec() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let filePath = bundle.pathForResource("Staat der Nederlanden EV Root CA", ofType: "der")!
+        let bundle = Bundle(for: type(of: self))
+        let filePath = bundle.path(forResource: "Staat der Nederlanden EV Root CA", ofType: "der")!
 
         it("can load from file") {
             let cert = SecCertificate.create(derEncodedFile: filePath)
@@ -21,7 +21,7 @@ class SecCertificateTests: QuickSpec {
             let cert = SecCertificate.create(derEncodedFile: filePath)!
             let certData = cert.data
             let fileData = NSData(contentsOfFile: filePath)!
-            expect(certData) == fileData
+            expect(certData) == fileData as Data
         }
 
         it("can return the public key") {

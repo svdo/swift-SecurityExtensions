@@ -1,6 +1,8 @@
 import Foundation
 import Security
 
+public typealias KeyPair = (privateKey:SecKey, publicKey:SecKey)
+
 extension SecKey {
 
     /**
@@ -10,7 +12,7 @@ extension SecKey {
      * - returns: The generated key pair.
      * - throws: A `SecKeyError` when something went wrong.
      */
-    public static func generateKeyPair(ofSize bits:UInt) throws -> (privateKey:SecKey, publicKey:SecKey) {
+    public static func generateKeyPair(ofSize bits:UInt) throws -> KeyPair {
         let pubKeyAttrs = [ kSecAttrIsPermanent as String: true ]
         let privKeyAttrs = [ kSecAttrIsPermanent as String: true ]
         let params: NSDictionary = [ kSecAttrKeyType as String : kSecAttrKeyTypeRSA as String,
@@ -21,10 +23,10 @@ extension SecKey {
         var privKey: SecKey?
         let status = SecKeyGeneratePair(params, &pubKey, &privKey)
         guard status == errSecSuccess else {
-            throw SecKeyError.GenerateKeyPairFailed(osStatus: status)
+            throw SecKeyError.generateKeyPairFailed(osStatus: status)
         }
-        guard let pub = pubKey, priv = privKey else {
-            throw SecKeyError.GenerateKeyPairFailed(osStatus: nil)
+        guard let pub = pubKey, let priv = privKey else {
+            throw SecKeyError.generateKeyPairFailed(osStatus: nil)
         }
 
         try changeKeyTag(priv)
@@ -33,16 +35,16 @@ extension SecKey {
         return (priv, pub)
     }
 
-    static private func changeKeyTag(key: SecKey) throws {
+    static fileprivate func changeKeyTag(_ key: SecKey) throws {
         let query = [kSecValueRef as String: key]
         guard let keyTag = key.keychainTag else {
-            throw SecKeyError.GenerateKeyPairFailed(osStatus: nil)
+            throw SecKeyError.generateKeyPairFailed(osStatus: nil)
         }
         let attrsToUpdate = [kSecAttrApplicationTag as String: keyTag]
-        let status = SecItemUpdate(query, attrsToUpdate)
+        let status = SecItemUpdate(query as CFDictionary, attrsToUpdate as CFDictionary)
 
         guard status == errSecSuccess else {
-            throw SecKeyError.GenerateKeyPairFailed(osStatus: status)
+            throw SecKeyError.generateKeyPairFailed(osStatus: status)
         }
     }
 
@@ -57,7 +59,7 @@ extension SecKey {
 /**
  * Errors related to SecKey extensions.
  */
-public enum SecKeyError: ErrorType {
+public enum SecKeyError: Error {
     /**
      * Indicates that generating a key pair has failed. The associated osStatus is the return value
      * of `SecKeyGeneratePair`.
@@ -65,5 +67,5 @@ public enum SecKeyError: ErrorType {
      * - parameter osStatus: The return value of SecKeyGeneratePair. If this is `errSecSuccess`
      *                       then something else failed.
      */
-    case GenerateKeyPairFailed(osStatus: OSStatus?)
+    case generateKeyPairFailed(osStatus: OSStatus?)
 }

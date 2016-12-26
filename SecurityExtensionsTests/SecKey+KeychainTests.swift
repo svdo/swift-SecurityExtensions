@@ -6,27 +6,23 @@ import Nimble
 class SecKey_KeychainTests: QuickSpec {
     override func spec() {
         it("can return the keychain tag of a key") {
-            expect { Void->Void in
-                let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
-                expect(privKey.keychainTag) != ""
-                expect(pubKey.keychainTag) != ""
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            expect(keys.privateKey.keychainTag) != ""
+            expect(keys.publicKey.keychainTag) != ""
         }
 
         it("can retrieve a key by tag") {
-            expect { Void->Void in
-                let (privKey, pubKey) = try SecKey.generateKeyPair(ofSize: 512)
-                let privTag = privKey.keychainTag
-                let pubTag = pubKey.keychainTag
-                expect(privTag).toNot(beNil())
-                expect(pubTag).toNot(beNil())
-                if let privTag = privTag, pubTag = pubTag {
-                    let retrievedPrivKey = SecKey.loadFromKeychain(tag: privTag)
-                    let retrievedPubKey = SecKey.loadFromKeychain(tag: pubTag)
-                    expect(retrievedPrivKey?.keyData) == privKey.keyData
-                    expect(retrievedPubKey?.keyData) == pubKey.keyData
-                }
-            }.toNot(throwError())
+            let keys = testKeyPair()
+            let privTag = keys.privateKey.keychainTag
+            let pubTag = keys.publicKey.keychainTag
+            expect(privTag).toNot(beNil())
+            expect(pubTag).toNot(beNil())
+            if let privTag = privTag, let pubTag = pubTag {
+                let retrievedPrivKey = SecKey.loadFromKeychain(tag: privTag)
+                let retrievedPubKey = SecKey.loadFromKeychain(tag: pubTag)
+                expect(retrievedPrivKey?.keyData) == keys.privateKey.keyData
+                expect(retrievedPubKey?.keyData) == keys.publicKey.keyData
+            }
         }
     }
 }
