@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/svdo/swift-SecurityExtensions"
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
   s.author             = { "Stefan van den Oord" => "soord@mac.com" }
-  s.platform     = :ios, "9.3"
+  s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/svdo/swift-SecurityExtensions.git", :tag => "#{s.version}" }
   s.source_files  = "SecurityExtensions/*.swift"
   s.framework  = "Security"
