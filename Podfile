@@ -7,7 +7,7 @@ target 'SecurityExtensions' do
 
   target 'SecurityExtensionsTests' do
     pod 'Quick', '~> 1.0'
-    pod 'Nimble', '~> 5.0'
+    pod 'Nimble', '~> 6.0'
   end
 
 end

@@ -664,7 +664,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F241A18CB44CC5916BE3AC16 /* Pods-SecurityExtensions-SecurityExtensionsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7EQ9KX3BR9;
 				INFOPLIST_FILE = SecurityExtensionsTests/Info.plist;
@@ -679,7 +678,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BD28BAA32CC33A9F1CCAE17 /* Pods-SecurityExtensions-SecurityExtensionsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7EQ9KX3BR9;
 				INFOPLIST_FILE = SecurityExtensionsTests/Info.plist;
@@ -698,7 +696,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7EQ9KX3BR9;
 				INFOPLIST_FILE = TestHost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vandenoord.TestHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -715,7 +712,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7EQ9KX3BR9;
 				INFOPLIST_FILE = TestHost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vandenoord.TestHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";

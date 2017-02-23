@@ -14,6 +14,16 @@ IDZSwiftCommonCrypto provides the following classes:
 * `StreamCryptor` for encrypting and decrypting streaming information, and
 * `PBKDF` for deriving key material from a password or passphrase.
 
+Which Release to Use
+--------------------
+Which version you use depends on which version of Xcode and Swift you are currently using. Please refer to the list below:
+
+* 0.7.4 -- Xcode 7.3.1, Swift 2.2
+* 0.8.0 -- Xcode 7.3.1, Swift 2.2, with additional APIs for `CCMode`
+* 0.8.3 -- Xcode 8.0, Swift 2.3
+* 0.9.x -- Xcode 8.0, Swift 3.0
+
+
 Using `Digest`
 --------------
 
@@ -92,10 +102,10 @@ assert(hmacs5! == expectedRFC2202)
 var key = arrayFromHexString("2b7e151628aed2a6abf7158809cf4f3c")
 var plainText = "The quick brown fox jumps over the lazy dog. The fox has more or less had it at this point."
 
-var cryptor = Cryptor(operation:.Encrypt, algorithm:.AES, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
+var cryptor = Cryptor(operation:.encrypt, algorithm:.aes, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
 var cipherText = cryptor.update(plainText)?.final()
 
-cryptor = Cryptor(operation:.Decrypt, algorithm:.AES, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
+cryptor = Cryptor(operation:.decrypt, algorithm:.aes, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
 var decryptedPlainText = cryptor.update(cipherText!)?.final()
 var decryptedString = decryptedPlainText!.reduce("") { $0 + String(UnicodeScalar($1)) }
 decryptedString
@@ -156,13 +166,13 @@ var encryptedFileOutputStream = NSOutputStream(toFileAtPath: encryptedFilePath, 
 var encryptedFileInputStream = NSInputStream(fileAtPath: encryptedFilePath)
 var decryptedFileOutputStream = NSOutputStream(toFileAtPath: decryptedFilePath, append:false)
 
-var sc = StreamCryptor(operation:.Encrypt, algorithm:.AES, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
+var sc = StreamCryptor(operation:.encrypt, algorithm:.aes, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
 crypt(sc, imageInputStream, encryptedFileOutputStream, 1024)
 
 // Uncomment this line to verify that the file is encrypted
 //var encryptedImage = UIImage(contentsOfFile:encryptedFile)
 
-sc = StreamCryptor(operation:.Decrypt, algorithm:.AES, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
+sc = StreamCryptor(operation:.decrypt, algorithm:.aes, options:.PKCS7Padding, key:key, iv:Array<UInt8>())
 crypt(sc, encryptedFileInputStream, decryptedFileOutputStream, 1024)
 
 var image = UIImage(named:"Riscal.jpg")
