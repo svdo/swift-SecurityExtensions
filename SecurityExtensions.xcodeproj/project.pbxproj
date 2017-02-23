@@ -760,6 +760,7 @@
 				F8DE3B3B1E1124A200115BAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
