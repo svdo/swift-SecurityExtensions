@@ -1,3 +1,7 @@
+Version 3.0.2
+=============
+Fixed compiler warning in SecKey+Crypt.swift.
+
 Version 3.0.1
 =============
 Changed deployment target from iOS 9.3 to iOS 9.0.
