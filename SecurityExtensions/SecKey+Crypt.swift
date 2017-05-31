@@ -90,7 +90,7 @@ public extension SecKey {
             return nil
         }
         let plainText = NSString(bytes: plainTextData, length: plainTextData.count, encoding: String.Encoding.utf8.rawValue)
-        return plainText as? String
+        return plainText as String?
     }
 
 }
