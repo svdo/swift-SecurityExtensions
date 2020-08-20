@@ -1,5 +1,5 @@
 //
-//  CwlCatchException.m
+//  CwlCatchException.swift
 //  CwlAssertionTesting
 //
 //  Created by Matt Gallagher on 2016/01/10.
@@ -18,20 +18,18 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#import "CwlCatchException.h"
+import Foundation
 
-#if !SWIFT_PACKAGE && NON_SWIFT_PACKAGE
-__attribute__((visibility("hidden")))
+#if SWIFT_PACKAGE
+import CwlCatchExceptionSupport
 #endif
-NSException* catchExceptionOfKind(Class __nonnull type, __attribute__((noescape)) void (^ __nonnull inBlock)()) {
-	@try {
-		inBlock();
-	} @catch (NSException *exception) {
-		if ([exception isKindOfClass:type]) {
-			return exception;
-		} else {
-			@throw;
-		}
+
+private func catchReturnTypeConverter<T: NSException>(_ type: T.Type, block: () -> Void) -> T? {
+	return catchExceptionOfKind(type, block) as? T
+}
+
+extension NSException {
+	public static func catchException(in block: () -> Void) -> Self? {
+		return catchReturnTypeConverter(self, block: block)
 	}
-	return nil;
 }
