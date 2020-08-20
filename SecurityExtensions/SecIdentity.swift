@@ -8,7 +8,7 @@ public extension SecIdentity {
      * 
      * - returns: the certificate, if possible
      */
-    public var certificate: SecCertificate? {
+    var certificate: SecCertificate? {
         var uCert: SecCertificate?
         let status = SecIdentityCopyCertificate(self, &uCert)
         if (status != errSecSuccess) {

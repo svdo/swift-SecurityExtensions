@@ -28,7 +28,7 @@ extension String {
         let stringToConvert: String
         let prefixRange = self.range(of: "0x")
         if let r = prefixRange, r.lowerBound == self.startIndex && r.upperBound != r.lowerBound {
-            stringToConvert = self.substring(from: r.upperBound)
+            stringToConvert = String(self[r.upperBound...])
         }
         else {
             stringToConvert = self
@@ -42,8 +42,8 @@ private func stringToByteArray(_ string: String) -> [UInt8]? {
     for byteIndex in 0 ..< string.count/2 {
         let start = string.index(string.startIndex, offsetBy: byteIndex*2)
         let end = string.index(start, offsetBy: 2)
-        let byteString = string.substring(with: start ..< end)
-        guard let byte = scanHexByte(byteString) else {
+        let byteString = string[start ..< end]
+        guard let byte = scanHexByte(String(byteString)) else {
             return nil
         }
         result.append(byte)

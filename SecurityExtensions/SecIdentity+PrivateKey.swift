@@ -7,7 +7,7 @@ public extension SecIdentity {
      *
      * - returns: the identity's private key, if possible
      */
-    public var privateKey: SecKey? {
+    var privateKey: SecKey? {
         var privKey : SecKey?
         guard SecIdentityCopyPrivateKey(self, &privKey) == errSecSuccess else {
             return nil
