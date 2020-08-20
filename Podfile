@@ -6,8 +6,8 @@ target 'SecurityExtensions' do
   pod 'IDZSwiftCommonCrypto', '~> 0.11.0'
 
   target 'SecurityExtensionsTests' do
-    pod 'Quick', '~> 1.2.0'
-    pod 'Nimble', '~> 7.2.0'
+    pod 'Quick', '~> 3.0'
+    pod 'Nimble', '~> 8.0'
   end
 
 end
