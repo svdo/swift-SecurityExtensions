@@ -321,10 +321,9 @@
 			};
 			buildConfigurationList = 02C5585F1D549B40008708A6 /* Build configuration list for PBXProject "SecurityExtensions" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
