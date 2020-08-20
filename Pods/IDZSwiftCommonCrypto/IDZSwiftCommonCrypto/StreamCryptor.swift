@@ -39,16 +39,9 @@ open class StreamCryptor
         }
     }
     
-    ///
-    /// Values used to specify the valid key sizes for an algorithm.
-    /// Key sizes are specified in bytes.
-    ///
     public enum ValidKeySize {
-        /// Use when there is a single valid key size.
         case fixed(Int)
-        /// Used when there is a discrete set of values. This pre-dates Swift Set.
         case discrete([Int])
-        /// Used when a continuous range of key sizes are valid.
         case range(Int,Int)
         
         /**
@@ -79,52 +72,41 @@ open class StreamCryptor
                 }
             }
         }
+        
+        
     }
 	
 	///
 	/// Enumerates encryption mode
 	///
-    public enum Mode
-    {
-        /// Electronic Code Book
-        case ECB
-        /// Cipher Block Chaining
-        case CBC
-        /// Cipher FeeBack
-        case CFB
-        /// Counter
-        case CTR
-        /// Output FeedBack
-        case OFB
-        /// RC4 streaming
-        case RC4
-        /// Cipher FeebBack with 8-bit shifts
-        case CFB8
-        
-        
-        /// Obtain the native value for a Mode.
-        func nativeValue() -> CCMode {
-            switch self {
-            case .ECB : return CCMode(kCCModeECB)
-            case .CBC : return CCMode(kCCModeCBC)
-            case .CFB : return CCMode(kCCModeCFB)
-            case .CTR : return CCMode(kCCModeCTR)
-            case .OFB : return CCMode(kCCModeOFB)
-            case .RC4 : return CCMode(kCCModeRC4)
-            case .CFB8 : return CCMode(kCCModeCFB8)
-            }
-        }
-        
-        /// Returns true if this `Mode` requires an initialization vector.
-        func requiresInitializationVector() -> Bool {
-            switch self {
-            case .ECB:
-                return false;
-            default:
-                return true;
-            }
-        }
-    }
+	public enum Mode
+	{
+		case ECB
+		case CBC
+		case CFB
+		case CTR
+		case F8	//		= 5, // Unimplemented for now (not included)
+		case LRW//		= 6, // Unimplemented for now (not included)
+		case OFB
+		case XTS
+		case RC4
+		case CFB8
+		
+		func nativeValue() -> CCMode {
+			switch self {
+			case .ECB : return CCMode(kCCModeECB)
+			case .CBC : return CCMode(kCCModeCBC)
+			case .CFB : return CCMode(kCCModeCFB)
+			case .CTR : return CCMode(kCCModeCTR)
+			case .F8 : return CCMode(kCCModeF8)// Unimplemented for now (not included)
+			case .LRW : return CCMode(kCCModeLRW)// Unimplemented for now (not included)
+			case .OFB : return CCMode(kCCModeOFB)
+			case .XTS : return CCMode(kCCModeXTS)
+			case .RC4 : return CCMode(kCCModeRC4)
+			case .CFB8 : return CCMode(kCCModeCFB8)
+			}
+		}
+	}
 	
 	/**
 	 Enumerated encryption paddings
@@ -188,7 +170,7 @@ open class StreamCryptor
             }
         }
         
-        /// Determines the valid key size, in bytes, for this algorithm
+        /// Determines the valid key size for this algorithm
         func validKeySize() -> ValidKeySize {
             switch self {
             case .aes : return .discrete([kCCKeySizeAES128, kCCKeySizeAES192, kCCKeySizeAES256])
@@ -254,12 +236,7 @@ open class StreamCryptor
 
     //MARK: - High-level interface
     /**
-        Creates a new StreamCryptor.
-     
-        If they `key` is too short it will be zero padded to the next valid key length.
-     
-        For all but Electronic Code Book mode an initialization vector of the correct length
-        must be supplied.
+        Creates a new StreamCryptor
     
         - parameter operation: the operation to perform see Operation (Encrypt, Decrypt)
         - parameter algorithm: the algorithm to use see Algorithm (AES, DES, TripleDES, CAST, RC2, Blowfish)
@@ -269,19 +246,13 @@ open class StreamCryptor
     public convenience init(operation: Operation, algorithm: Algorithm, options: Options, key: [UInt8], iv : [UInt8])
     {
         guard let paddedKeySize = algorithm.padded(keySize:key.count) else {
-            fatalError("FATAL_ERROR: Invalid key size.")
+            fatalError("FATAL_ERROR: Invalid key size")
         }
-        self.init(operation:operation, algorithm:algorithm, options:options,
-                  keyBuffer:zeroPad(array: key, blockSize: paddedKeySize), keyByteCount:paddedKeySize,
-                  ivBuffer:iv, ivByteCount: iv.count)
+        
+        self.init(operation:operation, algorithm:algorithm, options:options, keyBuffer:zeroPad(array: key, blockSize: paddedKeySize), keyByteCount:paddedKeySize, ivBuffer:iv)
     }
     /**
-        Creates a new StreamCryptor.
-     
-         If they `key` is too short it will be zero padded to the next valid key length.
-     
-         For all but Electronic Code Book mode an initialization vector of the correct length
-         must be supplied.
+        Creates a new StreamCryptor
         
         - parameter operation: the operation to perform see Operation (Encrypt, Decrypt)
         - parameter algorithm: the algorithm to use see Algorithm (AES, DES, TripleDES, CAST, RC2, Blowfish)
@@ -290,20 +261,15 @@ open class StreamCryptor
     */
     public convenience init(operation: Operation, algorithm: Algorithm, options: Options, key: String, iv : String)
     {
-        guard let paddedKeySize = algorithm.padded(keySize: key.utf8.count) else {
+        let keySize = key.utf8.count
+        guard let paddedKeySize = algorithm.padded(keySize: keySize) else {
             fatalError("FATAL_ERROR: Invalid key size")
         }
-        self.init(operation:operation, algorithm:algorithm, options:options,
-                  keyBuffer:zeroPad(string: key, blockSize: paddedKeySize), keyByteCount:paddedKeySize,
-                  ivBuffer:iv, ivByteCount: iv.utf8.count)
+        
+        self.init(operation:operation, algorithm:algorithm, options:options, keyBuffer:zeroPad(string: key, blockSize: paddedKeySize), keyByteCount:paddedKeySize, ivBuffer:iv)
     }
 	/**
 	Creates a new StreamCryptor
-     
-     If they `key` is too short it will be zero padded to the next valid key length.
-     
-     For all but Electronic Code Book mode an initialization vector of the correct length
-     must be supplied.
 	
 	- parameter operation: the operation to perform see Operation (Encrypt, Decrypt)
 	- parameter algorithm: the algorithm to use see Algorithm (AES, DES, TripleDES, CAST, RC2, Blowfish)
@@ -315,20 +281,13 @@ open class StreamCryptor
 	*/
 	public convenience init(operation: Operation, algorithm: Algorithm, mode: Mode, padding: Padding, key: [UInt8], iv : [UInt8]) {
         
-        guard let paddedKeySize = algorithm.padded(keySize:key.count) else {
-            fatalError("FATAL_ERROR: Invalid key size.")
-        }
-		self.init(operation: operation, algorithm: algorithm, mode: mode, padding: padding,
-                  keyBuffer: zeroPad(array: key, blockSize: paddedKeySize), keyByteCount: paddedKeySize,
-                  ivBuffer: iv, ivByteCount: iv.count)
+        guard algorithm.isValid(keySize: key.count) else  { fatalError("FATAL_ERROR: Invalid key size.") }
+
+		
+		self.init(operation: operation, algorithm: algorithm, mode: mode, padding: padding, keyBuffer: key, keyByteCount: key.count, ivBuffer: iv)
 	}
 	/**
 	Creates a new StreamCryptor
-     
-     If they `key` is too short it will be zero padded to the next valid key length.
-     
-     For all but Electronic Code Book mode an initialization vector of the correct length
-     must be supplied.
 	
 	- parameter operation: the operation to perform see Operation (Encrypt, Decrypt)
 	- parameter algorithm: the algorithm to use see Algorithm (AES, DES, TripleDES, CAST, RC2, Blowfish)
@@ -339,12 +298,12 @@ open class StreamCryptor
 	
 	*/
 	public convenience init(operation: Operation, algorithm: Algorithm, mode: Mode, padding: Padding, key: String, iv: String) {
-        guard let paddedKeySize = algorithm.padded(keySize: key.utf8.count) else {
+		let keySize = key.utf8.count
+        guard let paddedKeySize = algorithm.padded(keySize: keySize) else {
 			fatalError("FATAL_ERROR: Invalid key size")
 		}
-        self.init(operation:operation, algorithm:algorithm, mode: mode, padding: padding,
-                  keyBuffer:zeroPad(string: key, blockSize: paddedKeySize), keyByteCount: paddedKeySize,
-                  ivBuffer: iv, ivByteCount: iv.utf8.count)
+		
+        self.init(operation:operation, algorithm:algorithm, mode: mode, padding: padding, keyBuffer:zeroPad(string: key, blockSize: paddedKeySize), keyByteCount: paddedKeySize, ivBuffer: iv)
 	}
     /**
         Add the contents of an Objective-C NSData buffer to the current encryption/decryption operation.
@@ -416,14 +375,10 @@ open class StreamCryptor
         - parameter keyByteCount: number of bytes in the key
         - parameter ivBuffer: initialization vector buffer
     */
-    public init(operation: Operation, algorithm: Algorithm, options: Options,
-                keyBuffer: UnsafeRawPointer, keyByteCount: Int,
-                ivBuffer: UnsafeRawPointer, ivByteCount: Int)
+    public init(operation: Operation, algorithm: Algorithm, options: Options, keyBuffer: UnsafeRawPointer,
+        keyByteCount: Int, ivBuffer: UnsafeRawPointer)
     {
         guard algorithm.isValid(keySize: keyByteCount) else  { fatalError("FATAL_ERROR: Invalid key size.") }
-        guard options.contains(.ECBMode) || algorithm.blockSize() == ivByteCount else {
-            fatalError("FATAL_ERROR: Invalid initialization vector size.")
-        }
 
         let rawStatus = CCCryptorCreate(operation.nativeValue(), algorithm.nativeValue(), CCOptions(options.rawValue), keyBuffer, keyByteCount, ivBuffer, context)
         if let status = Status.fromRaw(status: rawStatus)
@@ -444,20 +399,11 @@ open class StreamCryptor
 	- parameter keyBuffer: pointer to key buffer
 	- parameter keyByteCount: number of bytes in the key
 	- parameter ivBuffer: initialization vector buffer
-    - parameter ivByteCount: the length of the initialization vector `ivBuffer` in bytes
 	
 	*/
-	public init(operation: Operation,
-                algorithm: Algorithm,
-                mode: Mode,
-                padding: Padding,
-                keyBuffer: UnsafeRawPointer, keyByteCount: Int,
-                ivBuffer: UnsafeRawPointer, ivByteCount: Int) {
+	public init(operation: Operation, algorithm: Algorithm, mode: Mode, padding: Padding, keyBuffer: UnsafeRawPointer, keyByteCount: Int, ivBuffer: UnsafeRawPointer) {
 		
         guard algorithm.isValid(keySize: keyByteCount) else  { fatalError("FATAL_ERROR: Invalid key size.") }
-        guard !mode.requiresInitializationVector() || algorithm.blockSize() == ivByteCount else {
-            fatalError("FATAL_ERROR: Invalid initialization vector size.")
-        }
 		
 		let rawStatus = CCCryptorCreateWithMode(operation.nativeValue(), mode.nativeValue(), algorithm.nativeValue(), padding.nativeValue(), ivBuffer, keyBuffer, keyByteCount, nil, 0, 0, 0, context)
 		if let status = Status.fromRaw(status: rawStatus)
