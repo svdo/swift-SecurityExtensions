@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.source_files  = "SecurityExtensions/*.swift"
   s.framework  = "Security"
   s.requires_arc = true
+  s.swift_version = '5'
   s.dependency "IDZSwiftCommonCrypto", "~> 0.9"
 
 end
