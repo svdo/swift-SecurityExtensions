@@ -1,3 +1,7 @@
+Version 4.0.0
+=============
+Converted to Swfit 5.
+
 Version 3.0.2
 =============
 Fixed compiler warning in SecKey+Crypt.swift.
