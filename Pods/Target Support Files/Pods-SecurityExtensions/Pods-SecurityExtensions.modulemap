@@ -1,6 +1,0 @@
-framework module Pods_SecurityExtensions {
-  umbrella header "Pods-SecurityExtensions-umbrella.h"
-
-  export *
-  module * { export * }
-}
