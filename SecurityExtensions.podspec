@@ -9,13 +9,10 @@ Pod::Spec.new do |s|
   s.homepage      = "https://github.com/svdo/swift-SecurityExtensions"
   s.license       = { :type => "MIT", :file => "LICENSE.txt" }
   s.author        = { "Stefan van den Oord" => "soord@mac.com" }
-  s.platform      = :ios, "9.0"
+  s.platform      = :ios, "13.0"
   s.source        = { :git => "https://github.com/svdo/swift-SecurityExtensions.git", :tag => "#{s.version}" }
   s.source_files  = "SecurityExtensions/*.swift"
   s.framework     = "Security"
   s.requires_arc  = true
   s.swift_version = '5'
-
-  s.dependency "IDZSwiftCommonCrypto", "~> 0.13.0"
-
 end
