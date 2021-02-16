@@ -20,9 +20,9 @@
 		02C5589F1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 02C5589E1D54CF4D008708A6 /* Staat der Nederlanden EV Root CA.der */; };
 		C00B5022DFE87441F7D102A1 /* SecKey+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5817AAC2DC882B7970E2 /* SecKey+Keychain.swift */; };
 		C00B5CE0260747F9ECF92B6B /* HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5207131A0D04EC6AC660 /* HexString.swift */; };
-		E2D1DD2025DAC36A00114EDE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD1F25DAC36A00114EDE /* SwiftPackageProductDependency */; };
-		E2D1DD2625DAC38700114EDE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD2525DAC38700114EDE /* SwiftPackageProductDependency */; };
-		E2D1DD2C25DAC3A200114EDE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD2B25DAC3A200114EDE /* SwiftPackageProductDependency */; };
+		E2D1DD2025DAC36A00114EDE /* IDZSwiftCommonCrypto in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD1F25DAC36A00114EDE /* IDZSwiftCommonCrypto */; };
+		E2D1DD2625DAC38700114EDE /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD2525DAC38700114EDE /* Nimble */; };
+		E2D1DD2C25DAC3A200114EDE /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1DD2B25DAC3A200114EDE /* Quick */; };
 		F841B5151E0FC66000331B23 /* HexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B571A92CA4BBE0CE30CB3 /* HexStringTests.swift */; };
 		F841B5161E0FC68100331B23 /* SecIdenity+testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558921D549C95008708A6 /* SecIdenity+testing.swift */; };
 		F841B5171E0FC68800331B23 /* SecCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C558A01D54CF75008708A6 /* SecCertificateTests.swift */; };
@@ -97,7 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02C558801D549B53008708A6 /* Security.framework in Frameworks */,
-				E2D1DD2025DAC36A00114EDE /* BuildFile in Frameworks */,
+				E2D1DD2025DAC36A00114EDE /* IDZSwiftCommonCrypto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,9 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2D1DD2625DAC38700114EDE /* BuildFile in Frameworks */,
+				E2D1DD2625DAC38700114EDE /* Nimble in Frameworks */,
 				02C558701D549B40008708A6 /* SecurityExtensions.framework in Frameworks */,
-				E2D1DD2C25DAC3A200114EDE /* BuildFile in Frameworks */,
+				E2D1DD2C25DAC3A200114EDE /* Quick in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +228,7 @@
 			);
 			name = SecurityExtensions;
 			packageProductDependencies = (
-				E2D1DD1F25DAC36A00114EDE /* SwiftPackageProductDependency */,
+				E2D1DD1F25DAC36A00114EDE /* IDZSwiftCommonCrypto */,
 			);
 			productName = SecurityExtensions;
 			productReference = 02C558651D549B40008708A6 /* SecurityExtensions.framework */;
@@ -250,8 +250,8 @@
 			);
 			name = SecurityExtensionsTests;
 			packageProductDependencies = (
-				E2D1DD2525DAC38700114EDE /* SwiftPackageProductDependency */,
-				E2D1DD2B25DAC3A200114EDE /* SwiftPackageProductDependency */,
+				E2D1DD2525DAC38700114EDE /* Nimble */,
+				E2D1DD2B25DAC3A200114EDE /* Quick */,
 			);
 			productName = SecurityExtensionsTests;
 			productReference = 02C5586F1D549B40008708A6 /* SecurityExtensionsTests.xctest */;
@@ -315,9 +315,9 @@
 			);
 			mainGroup = 02C5585B1D549B40008708A6;
 			packageReferences = (
-				E2D1DD1E25DAC36A00114EDE /* RemoteSwiftPackageReference */,
-				E2D1DD2425DAC38700114EDE /* RemoteSwiftPackageReference */,
-				E2D1DD2A25DAC3A200114EDE /* RemoteSwiftPackageReference */,
+				E2D1DD1E25DAC36A00114EDE /* XCRemoteSwiftPackageReference "IDZSwiftCommonCrypto" */,
+				E2D1DD2425DAC38700114EDE /* XCRemoteSwiftPackageReference "Nimble" */,
+				E2D1DD2A25DAC3A200114EDE /* XCRemoteSwiftPackageReference "Quick" */,
 			);
 			productRefGroup = 02C558661D549B40008708A6 /* Products */;
 			projectDirPath = "";
@@ -718,7 +718,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E2D1DD1E25DAC36A00114EDE /* RemoteSwiftPackageReference */ = {
+		E2D1DD1E25DAC36A00114EDE /* XCRemoteSwiftPackageReference "IDZSwiftCommonCrypto" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/iosdevzone/IDZSwiftCommonCrypto";
 			requirement = {
@@ -726,7 +726,7 @@
 				minimumVersion = 0.13.1;
 			};
 		};
-		E2D1DD2425DAC38700114EDE /* RemoteSwiftPackageReference */ = {
+		E2D1DD2425DAC38700114EDE /* XCRemoteSwiftPackageReference "Nimble" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Quick/Nimble";
 			requirement = {
@@ -734,7 +734,7 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		E2D1DD2A25DAC3A200114EDE /* RemoteSwiftPackageReference */ = {
+		E2D1DD2A25DAC3A200114EDE /* XCRemoteSwiftPackageReference "Quick" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Quick/Quick";
 			requirement = {
@@ -745,19 +745,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E2D1DD1F25DAC36A00114EDE /* SwiftPackageProductDependency */ = {
+		E2D1DD1F25DAC36A00114EDE /* IDZSwiftCommonCrypto */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2D1DD1E25DAC36A00114EDE /* RemoteSwiftPackageReference */;
+			package = E2D1DD1E25DAC36A00114EDE /* XCRemoteSwiftPackageReference "IDZSwiftCommonCrypto" */;
 			productName = IDZSwiftCommonCrypto;
 		};
-		E2D1DD2525DAC38700114EDE /* SwiftPackageProductDependency */ = {
+		E2D1DD2525DAC38700114EDE /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2D1DD2425DAC38700114EDE /* RemoteSwiftPackageReference */;
+			package = E2D1DD2425DAC38700114EDE /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
 		};
-		E2D1DD2B25DAC3A200114EDE /* SwiftPackageProductDependency */ = {
+		E2D1DD2B25DAC3A200114EDE /* Quick */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2D1DD2A25DAC3A200114EDE /* RemoteSwiftPackageReference */;
+			package = E2D1DD2A25DAC3A200114EDE /* XCRemoteSwiftPackageReference "Quick" */;
 			productName = Quick;
 		};
 /* End XCSwiftPackageProductDependency section */
