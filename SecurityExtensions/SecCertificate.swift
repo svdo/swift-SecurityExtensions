@@ -1,4 +1,5 @@
 import Security
+import Foundation
 
 public extension SecCertificate {
 

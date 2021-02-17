@@ -1,4 +1,5 @@
 // Copyright (c) 2016 Stefan van den Oord. All rights reserved.
+import Foundation
 
 extension Sequence where Iterator.Element == UInt8 {
     /**
