@@ -1,14 +1,15 @@
 # SecurityExtensions for Swift
 
-![Swift Version 3](https://img.shields.io/badge/Swift-v3-yellow.svg)
+![Swift Version 5](https://img.shields.io/badge/Swift-v5-yellow.svg)
 [![CocoaPods Version Badge](https://img.shields.io/cocoapods/v/SecurityExtensions.svg)](https://cocoapods.org/pods/SecurityExtensions)
 [![License Badge](https://img.shields.io/cocoapods/l/SecurityExtensions.svg)](https://github.com/svdo/swift-SecurityExtensions/blob/master/LICENSE.txt)
 ![Supported Platforms Badge](https://img.shields.io/cocoapods/p/SecurityExtensions.svg)
 [![Percentage Documented Badge](https://img.shields.io/cocoapods/metrics/doc-percent/SecurityExtensions.svg)](http://cocoadocs.org/docsets/SecurityExtensions)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
 This framework intends to make it easier to use some of Apple's Security framework APIs from Swift. I tested this on iOS. It may also work on OS X, didn't look into that. You're welcome to create pull requests :)
 
-This framework requires Swift version 3.
+This framework requires Swift version 5.
 
 Overview
 --------
@@ -139,9 +140,9 @@ Converts a string containing the hexadecimal representation of a byte to a byte 
 
 Usage
 -----
-The easiest way to use this library is using [CocoaPods](https://cocoapods.org). Just put something like this in your `Podfile`:
+The easiest way to use this library is using Swift Package Manager or [CocoaPods](https://cocoapods.org). For CocoaPods, put something like this in your `Podfile`:
 
-    pod 'SecurityExtensions', '~> 1.0'
+    pod 'SecurityExtensions', '~> 4.0'
 
 License
 -------
