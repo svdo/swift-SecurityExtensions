@@ -1,4 +1,5 @@
 // Copyright (c) 2016 Stefan van den Oord. All rights reserved.
+import Foundation
 
 extension Sequence where Iterator.Element == UInt8 {
     /**
@@ -52,9 +53,9 @@ private func stringToByteArray(_ string: String) -> [UInt8]? {
 }
 
 private func scanHexByte(_ byteString: String) -> UInt8? {
-    var scanned: UInt32 = 0
+    var scanned: UInt64 = 0
     let scanner = Scanner(string: byteString)
-    guard scanner.scanHexInt32(&scanned) && scanner.isAtEnd else {
+    guard scanner.scanHexInt64(&scanned) && scanner.isAtEnd else {
         return nil
     }
     return UInt8(scanned)

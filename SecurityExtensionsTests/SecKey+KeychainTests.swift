@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import SecurityExtensions
 
 class SecKey_KeychainTests: QuickSpec {
     override func spec() {
