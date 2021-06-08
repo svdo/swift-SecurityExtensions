@@ -15,4 +15,7 @@ Pod::Spec.new do |s|
   s.framework     = "Security"
   s.requires_arc  = true
   s.swift_version = '5'
+
+  s.dependency "IDZSwiftCommonCrypto", "~> 0.13.0"
+
 end
